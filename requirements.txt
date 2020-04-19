@@ -29,7 +29,7 @@ MySQL-python==1.2.5
 mysqlclient==1.4.6
 progressbar==2.5
 protobuf==3.11.3
-psutil==5.4.2
+psutil==5.6.6
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycairo==1.16.2
