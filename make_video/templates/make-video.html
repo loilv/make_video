@@ -7,8 +7,10 @@
             </div>
             <div class="card-body">
                 <form action="{% url 'create-video' %}" method="post" enctype="multipart/form-data">
-                    <label for="i-title"><b>Tên Video</b></label>
-                    <input type="text" name="i-title" id="i-title" placeholder="" class="form-control">
+                    <div class="form-group">
+                        <label for="i-title"><b>Tên Video</b></label>
+                        <input type="text" name="i-title" id="i-title" placeholder="" class="form-control">
+                    </div>
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6">
@@ -27,7 +29,7 @@
                                         <option value="doanngocle">Đoàn Ngọc Lê (Miền Bắc)</option>
                                         <option value="trinhthiviettrinh">Trịch Thị Việt Trinh (Miền Bắc)</option>
                                         <option value="phamtienquan">Phạm Tiến Quân (Miền Bắc)</option>
-                                        <option value="phamtienquan">Lê Thị Yến (Miền Nam)</option>
+                                        <option value="lethiyen">Lê Thị Yến (Miền Nam)</option>
                                         <option value="nguyenthithuyduyen">Nguyễn Thị Duyên (Miền Nam)</option>
                                         <option value="hue-maingoc">Mai Ngọc (Miền Trung)</option>
                                         <option value="hue-baoquoc">Bảo Quốc (Miền Trung)</option>
@@ -41,13 +43,12 @@
                                         <div class="b-intro">
                                             <label for="i-speed"><b>Tốc độ đọc</b></label>
                                             <select name="i-speed" id="i-speed" class="form-control">
-                                                <option value="0.7">-3</option>
-                                                <option value="0.8">-2</option>
-                                                <option value="0.9">-1</option>
-                                                <option value="1" selected>0</option>
-                                                <option value="1.1">1</option>
-                                                <option value="1.2">2</option>
-                                                <option value="1.3">3</option>
+                                                <option value="0.7">-2</option>
+                                                <option value="0.8">-1</option>
+                                                <option value="0.9" selected>0</option>
+                                                <option value="1.0">1</option>
+                                                <option value="1.1">2</option>
+                                                <option value="1.2">3</option>
                                             </select>
                                         </div>
                                     </div>
@@ -62,66 +63,104 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="b-subtitles" style="margin-top: 10px">
-                                <label for="i-bg-m"><b>Thêm nhạc nền</b></label>
-                                <input type="file" class="form-control" id="i-bg-m" name="i-bg-music">
-                            </div>
-                            <div class="b-in-out p-l-15" style="margin-top: 10px">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="b-intro">
-                                            <label for="i-intro"><b>Thêm intro</b></label>
-                                            <input type="file" id="i-intro" class="form-control" name="i-intro">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="b-outro">
-                                            <label for="i-outro"><b>Thêm outro</b></label>
-                                            <input type="file" id="i-outro" class="form-control" name="i-outro">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="t-run"><b>Nhập chữ chạy</b></label>
-                                <div class="form-group">
-                                    <textarea name="t-run" id="t-run" cols="10" rows="10"
-                                              class="form-control"></textarea>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-md-6">
                             <div class="b-upload-image">
-                                <input type="file" id="images" name="images" class="form-control" multiple/>
-                                <div class="form-group">
-                                    <label for="fileupload"><b>Hình ảnh</b></label>
-                                    <div id="fileupload">
-                                        <div id="dropzone">Kéo ảnh hoặc <u class="text-danger pointer">chọn ảnh</u> từ
-                                            thư mục vào đây!
-                                        <input type="file" id="images" name="images[]" class="form-control" multiple/>
+                                <fieldset class="field-set">
+                                    <legend class="text-uppercase">Cài Đặt:</legend>
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab"
+                                               href="#video"
+                                               role="tab" aria-controls="home" aria-selected="true">Cấu hình video</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-uppercase" id="contact-tab" data-toggle="tab"
+                                               href="#youtube"
+                                               role="tab" aria-controls="contact" aria-selected="false">Upload
+                                                youtube</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-uppercase" id="profile-tab" data-toggle="tab"
+                                               href="#khac"
+                                               role="tab" aria-controls="profile" aria-selected="false">Khác</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="video" role="tabpanel"
+                                             aria-labelledby="home-tab">
+                                            <div class="form-group">
+                                                <label for="t-images"><b>Hình ảnh</b></label><br>
+                                                <span class="text-info note"><i>Vui lòng nhập mỗi link ảnh một dòng</i></span>
+                                                <input type="text" class="form-control"
+                                                       data-role="tagsinput"
+                                                       name="i-images"
+                                                       value=""
+                                                >
+                                            </div>
+                                            <div class="b-subtitles" style="margin-top: 10px">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="i-bg-m"><b>Thêm nhạc nền</b></label>
+                                                        <input type="file" class="form-control" id="i-bg-m"
+                                                               name="i-bg-music">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="formControlRange"><b>Volume</b></label>
+                                                            <input type="range" min="0" max="5" class="form-control-range"
+                                                                   id="formControlRange"
+                                                                   name="i-volume">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="b-in-out p-l-15" style="margin-top: 10px">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="b-intro">
+                                                            <label for="i-intro"><b>Thêm intro</b></label>
+                                                            <input type="file" id="i-intro" class="form-control"
+                                                                   name="i-intro">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="b-outro">
+                                                            <label for="i-outro"><b>Thêm outro</b></label>
+                                                            <input type="file" id="i-outro" class="form-control"
+                                                                   name="i-outro">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="t-run"><b>Nhập chữ chạy</b></label>
+                                                <div class="form-group">
+                                                        <textarea name="t-run" id="t-run" cols="10" rows="10"
+                                                                  class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="youtube" role="tabpanel"
+                                             aria-labelledby="profile-tab">
+                                        </div>
+                                        <div class="tab-pane fade" id="khac" role="tabpanel"
+                                             aria-labelledby="contact-tab">
+
+                                            <div class="form-group">
+                                                <label for="t-run"><b>Nhập chữ chạy</b></label>
+                                                <div class="form-group">
+                                                        <textarea name="t-run" id="t-run" cols="10" rows="10"
+                                                                  class="form-control"></textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <table id="fileTable" style="display: none;">
-                                    <thead>
-                                    <tr>
-                                        <th>File Name</th>
-                                        <th>Preview</th>
-                                        <th>Size</th>
-                                        <th>&nbsp</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="fileList">
-
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td id="result"></td>
-                                        <td>&nbsp</td>
-                                        <td>&nbsp</td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
+                                </fieldset>
                             </div>
                         </div>
                     </div>

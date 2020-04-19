@@ -18,7 +18,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home_page.urls')),
+    path('login/', include('author.urls')),
+    path('', include('author.urls')),
+    path('home', include('home_page.urls')),
     path('ytb-management/', include('ytb_managements.urls')),
     path('make-video/', include('make_video.urls'))
 ]
