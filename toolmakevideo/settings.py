@@ -25,7 +25,7 @@ SECRET_KEY = '9&v!2dixb$_fr-6=1gt7ocs-vgp26+@75&0wb++n1&(^#oixmc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
