@@ -59,3 +59,4 @@ $('#fileupload').fileupload({
         }
     }
 });
+
